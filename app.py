@@ -262,8 +262,8 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
                     st.success("✓ Dans les temps")
 
         # Barre de progression pour la durée
-        duree_normalisee = (tache.duree / 40) * 100  # Normalisation pour l'affichage
-        st.progress(min(duree_normalisee, 100), text=f"Durée: {tache.duree} unités")
+        duree_normalisee = tache.duree / 40  # Normalisation pour l'affichage
+        st.progress(min(duree_normalisee, 1.0), text=f"Durée: {tache.duree} unités")
 
         temps_actuel = temps_fin
         st.divider()
@@ -281,4 +281,5 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 
 
 if __name__ == "__main__":
+
     main()
