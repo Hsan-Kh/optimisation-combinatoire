@@ -2,6 +2,7 @@ import streamlit as st
 import random
 import sys
 import os
+import matplotlib.pyplot as plt
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'VoyageurDeCommerce'))
 sys.path.append(os.path.join(os.path.dirname(__file__), 'OrdonnancementDesTaches'))
@@ -38,29 +39,28 @@ st.set_page_config(
     layout="wide"
 )
 
-MATRICE_DISTANCES = [
-    [0, 2, 2, 7, 15, 2, 5, 7, 6, 5],
-    [2, 0, 10, 4, 7, 3, 7, 15, 8, 2],
-    [2, 10, 0, 1, 4, 3, 3, 4, 2, 3],
-    [7, 4, 1, 0, 2, 15, 7, 7, 5, 4],
-    [7, 10, 4, 2, 0, 7, 3, 2, 2, 7],
-    [2, 3, 3, 7, 7, 0, 1, 7, 2, 10],
-    [5, 7, 3, 7, 3, 1, 0, 2, 1, 3],
-    [7, 7, 4, 7, 2, 7, 2, 0, 1, 10],
-    [6, 8, 2, 5, 2, 2, 1, 1, 0, 15],
-    [5, 2, 3, 4, 7, 10, 3, 10, 15, 0]
-]
+def generer_matrice_distances(n_villes):
+"""Génère une matrice de distances aléatoire"""
+matrice = [[0] * n_villes for _ in range(n_villes)]
 
-TACHES = [
-    Tache(0, duree=5, deadline=20, priorite=3),
-    Tache(1, duree=3, deadline=10, priorite=5),
-    Tache(2, duree=8, deadline=25, priorite=2),
-    Tache(3, duree=4, deadline=15, priorite=4),
-    Tache(4, duree=6, deadline=30, priorite=1),
-    Tache(5, duree=2, deadline=8, priorite=5),
-    Tache(6, duree=7, deadline=35, priorite=3),
-    Tache(7, duree=5, deadline=18, priorite=4),
-]
+for i in range(n_villes):
+    for j in range(i + 1, n_villes):
+        distance = random.randint(1, 50)
+        matrice[i][j] = distance
+        matrice[j][i] = distance
+
+return matrice
+
+def generer_taches(n_taches):
+"""Génère des tâches aléatoires"""
+taches = []
+for i in range(n_taches):
+    duree = random.randint(1, 15)
+    deadline = random.randint(10, 50)
+    priorite = random.randint(1, 5)
+    taches.append(Tache(i, duree, deadline, priorite))
+return taches
+
 
 
 def calculer_retard_total(ordre, taches):
@@ -79,10 +79,48 @@ def main():
 
     st.sidebar.header("Configuration")
 
+    # Sélection du problème
     probleme = st.sidebar.selectbox(
         "Sélection du Problème",
         ["Voyageur de Commerce", "Ordonnancement des Tâches"]
     )
+    
+    # NOUVEAU : Paramètres de génération
+    st.sidebar.subheader("🎲 Génération des Données")
+    
+    if probleme == "Voyageur de Commerce":
+        n_villes = st.sidebar.slider("Nombre de villes", 5, 20, 10)
+        col1, col2 = st.sidebar.columns(2)
+        with col1:
+            if st.button("🔄 Générer aléatoirement", key="shuffle_tsp"):
+                st.session_state.matrice_distances = generer_matrice_distances(n_villes)
+        with col2:
+            if st.button("🔄 Shuffle données", key="shuffle_existing_tsp"):
+                if 'matrice_distances' in st.session_state:
+                    matrice = st.session_state.matrice_distances
+                    indices = list(range(len(matrice)))
+                    random.shuffle(indices)
+                    nouvelle_matrice = [[matrice[i][j] for j in indices] for i in indices]
+                    st.session_state.matrice_distances = nouvelle_matrice
+    else:
+        n_taches = st.sidebar.slider("Nombre de tâches", 5, 15, 8)
+        col1, col2 = st.sidebar.columns(2)
+        with col1:
+            if st.button("🔄 Générer aléatoirement", key="shuffle_scheduling"):
+                st.session_state.taches = generer_taches(n_taches)
+        with col2:
+            if st.button("🔄 Shuffle données", key="shuffle_existing_scheduling"):
+                if 'taches' in st.session_state:
+                    taches = st.session_state.taches[:]
+                    random.shuffle(taches)
+                    st.session_state.taches = taches
+    
+    # NOUVEAU : Initialiser session_state
+    if 'matrice_distances' not in st.session_state:
+        st.session_state.matrice_distances = MATRICE_DISTANCES
+    
+    if 'taches' not in st.session_state:
+        st.session_state.taches = TACHES
 
     algorithme = st.sidebar.selectbox(
         "Algorithme",
@@ -123,14 +161,33 @@ def main():
     st.header("Données du Problème")
 
     if probleme == "Voyageur de Commerce":
-        st.subheader("Matrice des Distances")
-        st.dataframe(MATRICE_DISTANCES, use_container_width=True)
-        st.write(f"**Nombre de villes :** {len(MATRICE_DISTANCES)}")
+        st.subheader(f"Matrice des Distances ({len(st.session_state.matrice_distances)} villes)")
+        st.dataframe(st.session_state.matrice_distances, use_container_width=True)
+        
+        # NOUVEAU : Visualisation heatmap
+        st.subheader("Visualisation des Distances")
+        fig, ax = plt.subplots(figsize=(10, 8))
+        im = ax.imshow(st.session_state.matrice_distances, cmap='YlOrRd')
+        plt.colorbar(im, ax=ax, label='Distance')
+        n_villes = len(st.session_state.matrice_distances)
+        ax.set_xticks(range(n_villes))
+        ax.set_yticks(range(n_villes))
+        ax.set_xticklabels([f'V{i}' for i in range(n_villes)])
+        ax.set_yticklabels([f'V{i}' for i in range(n_villes)])
+        ax.set_title("Matrice de Distances (Chaleur)")
+        st.pyplot(fig)
 
     else:
-        st.subheader("Liste des Tâches")
-        for tache in TACHES:
-            st.write(f"**{tache}** - Deadline: {tache.deadline}, Priorité: {tache.priorite}")
+        st.subheader(f"Liste des Tâches ({len(st.session_state.taches)} tâches)")
+        for i, tache in enumerate(st.session_state.taches):
+            with st.expander(f"Tâche {i}: {tache}"):
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Durée", tache.duree)
+                with col2:
+                    st.metric("Deadline", tache.deadline)
+                with col3:
+                    st.metric("Priorité", tache.priorite)
 
 
 def executer_simulation(probleme, algorithme, iterations, params):
@@ -152,7 +209,7 @@ def executer_simulation(probleme, algorithme, iterations, params):
 def executer_tsp(algorithme, iterations, params):
     if algorithme == "Recuit Simulé":
         return recuit_simule_tsp(
-            MATRICE_DISTANCES,
+            st.session_state.matrice_distances,
             iterations,
             params['temperature'],
             params['taux_refroidissement']
@@ -160,14 +217,14 @@ def executer_tsp(algorithme, iterations, params):
 
     elif algorithme == "Recherche Tabou":
         return tabu_search(
-            MATRICE_DISTANCES,
+            st.session_state.matrice_distances,
             iterations,
             params['taille_tabou']
         )
 
     elif algorithme == "Algorithme Génétique":
         return algorithme_genetique(
-            MATRICE_DISTANCES,
+            st.session_state.matrice_distances,
             params['taille_population'],
             iterations,
             params['taux_croisement'],
@@ -181,17 +238,17 @@ def executer_tsp(algorithme, iterations, params):
 def executer_ordonnancement(algorithme, iterations, params):
     if algorithme == "Recuit Simulé":
         return recuit_simule_ordonnancement(
-            TACHES, iterations, params['temperature'], 0.1, params['taux_refroidissement']
+            st.session_state.taches, iterations, params['temperature'], 0.1, params['taux_refroidissement']
         )
 
     elif algorithme == "Recherche Tabou":
         return recherche_tabou_ordonnancement(
-            TACHES, iterations, params['taille_tabou']
+            st.session_state.taches, iterations, params['taille_tabou']
         )
 
     elif algorithme == "Algorithme Génétique":
         return algorithme_genetique_ordonnancement(
-            TACHES, params['taille_population'], iterations,
+            st.session_state.taches, params['taille_population'], iterations,
             params['taux_croisement'], params['taux_mutation']
         )
 
@@ -270,5 +327,6 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
 
