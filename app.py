@@ -187,8 +187,21 @@ def main():
     col1, col2, col3 = st.sidebar.columns([1, 2, 1])
     with col2:
         if st.button("🚀 LANCER LA SIMULATION", type="primary", use_container_width=True):
-            executer_simulation(probleme, algorithme, iterations, locals)
-            st.sidebar.info("⏳ Simulation en cours...")
+            # Créer params_dict explicitement avec les variables dont vous avez besoin
+            params_dict = {}
+            
+            # Récupérer seulement les variables de paramètres que vous utilisez
+            if 'temperature' in locals(): params_dict['temperature'] = temperature
+            if 'taux_refroidissement' in locals(): params_dict['taux_refroidissement'] = taux_refroidissement
+            if 'taille_tabou' in locals(): params_dict['taille_tabou'] = taille_tabou
+            if 'taille_population' in locals(): params_dict['taille_population'] = taille_population
+            if 'taux_croisement' in locals(): params_dict['taux_croisement'] = taux_croisement
+            if 'taux_mutation' in locals(): params_dict['taux_mutation'] = taux_mutation
+            if 'selection' in locals(): params_dict['selection'] = selection
+            if 'croisement' in locals(): params_dict['croisement'] = croisement
+            if 'mutation' in locals(): params_dict['mutation'] = mutation
+            
+            executer_simulation(probleme, algorithme, iterations, params_dict)
     
     
     
@@ -362,6 +375,7 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
 
 
