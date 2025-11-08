@@ -188,7 +188,7 @@ def main():
     col1, col2, col3 = st.sidebar.columns([1, 2, 1])
     with col2:
         if st.button("🚀 LANCER LA SIMULATION", type="primary", use_container_width=True):
-            executer_simulation(probleme, algorithme, iterations, locals
+            executer_simulation(probleme, algorithme, iterations, locals)
             st.sidebar.info("⏳ Simulation en cours...")
     
     
@@ -363,6 +363,7 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
 
 
