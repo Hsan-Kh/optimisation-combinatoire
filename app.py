@@ -182,7 +182,7 @@ def main():
             
 
     
-    #st.sidebar.markdown("<h4 style='text-align: center;'> Exécution :</h4>", unsafe_allow_html=True)
+    st.sidebar.markdown("---")
     
     col1, col2, col3 = st.sidebar.columns([1, 2, 1])
     with col2:
@@ -362,6 +362,7 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
 
 
