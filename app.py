@@ -134,7 +134,7 @@ def main():
             if st.button("🔄 Générer aléatoirement", key="shuffle_scheduling"):
                 st.session_state.taches = generer_taches(n_taches)
         with col2:
-            if st.button("🔄 Shuffle données", key="shuffle_existing_scheduling"):
+            if st.button("🔄 Réorganiser aléatoirement", key="shuffle_existing_scheduling"):
                 if 'taches' in st.session_state:
                     taches = st.session_state.taches[:]
                     random.shuffle(taches)
@@ -380,6 +380,7 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
 
 
