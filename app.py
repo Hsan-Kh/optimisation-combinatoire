@@ -40,26 +40,26 @@ st.set_page_config(
 )
 
 def generer_matrice_distances(n_villes):
-"""Génère une matrice de distances aléatoire"""
-matrice = [[0] * n_villes for _ in range(n_villes)]
-
-for i in range(n_villes):
-    for j in range(i + 1, n_villes):
-        distance = random.randint(1, 50)
-        matrice[i][j] = distance
-        matrice[j][i] = distance
-
-return matrice
+    """Génère une matrice de distances aléatoire"""
+    matrice = [[0] * n_villes for _ in range(n_villes)]
+    
+    for i in range(n_villes):
+        for j in range(i + 1, n_villes):
+            distance = random.randint(1, 50)
+            matrice[i][j] = distance
+            matrice[j][i] = distance
+    
+    return matrice
 
 def generer_taches(n_taches):
-"""Génère des tâches aléatoires"""
-taches = []
-for i in range(n_taches):
-    duree = random.randint(1, 15)
-    deadline = random.randint(10, 50)
-    priorite = random.randint(1, 5)
-    taches.append(Tache(i, duree, deadline, priorite))
-return taches
+    """Génère des tâches aléatoires"""
+    taches = []
+    for i in range(n_taches):
+        duree = random.randint(1, 15)
+        deadline = random.randint(10, 50)
+        priorite = random.randint(1, 5)
+        taches.append(Tache(i, duree, deadline, priorite))
+    return taches
 
 
 
@@ -327,6 +327,7 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
 
 
