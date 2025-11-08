@@ -214,7 +214,7 @@ def main():
                     st.metric("Priorité", tache.priorite)
                     
     st.markdown("---")
-    st.markdown("<h2 style='text-align: center; color: #ff4b4b;'>🎯 EXÉCUTION</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: #ff4b4b;'> Exécution :</h2>", unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
@@ -381,6 +381,7 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
 
 
