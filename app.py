@@ -110,8 +110,9 @@ def main():
         with col1:
             taille_population = st.number_input("Taille population", 10, 500, 50)
             taux_croisement = st.slider("Taux croisement", 0.1, 1.0, 0.8)
-        with col2:
             taux_mutation = st.slider("Taux mutation", 0.01, 0.5, 0.2)
+
+        with col2:
             selection = st.selectbox("Sélection", ["roulette", "rang"])
             croisement = st.selectbox("Croisement", ["simple", "double", "barycentrique", "uniforme"])
             mutation = st.selectbox("Mutation", ["echange", "inversion", "insertion"])
@@ -269,4 +270,5 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
