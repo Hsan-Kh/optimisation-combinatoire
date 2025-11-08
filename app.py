@@ -117,10 +117,10 @@ def main():
         n_villes = st.sidebar.slider("Nombre de villes", 5, 20, 10)
         col1, col2 = st.sidebar.columns(2)
         with col1:
-            if st.button("🔄 Générer aléatoirement", key="shuffle_tsp"):
+            if st.button("🔄 Générer aléatoirement ", key="shuffle_tsp"):
                 st.session_state.matrice_distances = generer_matrice_distances(n_villes)
         with col2:
-            if st.button("🔄 Shuffle données", key="shuffle_existing_tsp"):
+            if st.button("🔄 Réorganiser aléatoirement ", key="shuffle_existing_tsp"):
                 if 'matrice_distances' in st.session_state:
                     matrice = st.session_state.matrice_distances
                     indices = list(range(len(matrice)))
@@ -352,6 +352,7 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
 
 
