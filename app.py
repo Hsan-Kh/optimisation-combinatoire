@@ -3,12 +3,10 @@ import random
 import sys
 import os
 
-# Ajouter le chemin des modules
 sys.path.append(os.path.join(os.path.dirname(__file__), 'VoyageurDeCommerce'))
 sys.path.append(os.path.join(os.path.dirname(__file__), 'OrdonnancementDesTaches'))
 sys.path.append(os.path.dirname(__file__))
 
-# Initialiser les variables
 Tache = None
 recherche_tabou_ordonnancement = None
 recuit_simule_ordonnancement = None
@@ -17,7 +15,6 @@ tabu_search = None
 recuit_simule_tsp = None
 algorithme_genetique = None
 
-# Import des problèmes et algorithmes
 try:
     from OrdonnancementDesTaches.tache import Tache
     from OrdonnancementDesTaches.utils import afficher_ordonnancement, calculer_cout
@@ -41,7 +38,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# Données par défaut
 MATRICE_DISTANCES = [
     [0, 2, 2, 7, 15, 2, 5, 7, 6, 5],
     [2, 0, 10, 4, 7, 3, 7, 15, 8, 2],
@@ -81,22 +77,18 @@ def calculer_retard_total(ordre, taches):
 def main():
     st.title("🔬 Interface de Simulation - Optimisation Combinatoire")
 
-    # Sidebar pour la configuration
     st.sidebar.header("Configuration")
 
-    # Sélection du problème
     probleme = st.sidebar.selectbox(
         "Sélection du Problème",
         ["Voyageur de Commerce", "Ordonnancement des Tâches"]
     )
 
-    # Sélection de l'algorithme
     algorithme = st.sidebar.selectbox(
         "Algorithme",
         ["Recuit Simulé", "Recherche Tabou", "Algorithme Génétique"]
     )
 
-    # Paramètres généraux
     st.sidebar.subheader("Paramètres Généraux")
 
     if algorithme == "Algorithme Génétique":
@@ -104,7 +96,6 @@ def main():
     else:
         iterations = st.sidebar.number_input("Nombre d'itérations", 10, 10000, 1000)
 
-    # Paramètres spécifiques selon l'algorithme
     st.sidebar.subheader("Paramètres Spécifiques")
 
     if algorithme == "Recuit Simulé":
@@ -125,11 +116,9 @@ def main():
             croisement = st.selectbox("Croisement", ["simple", "double", "barycentrique", "uniforme"])
             mutation = st.selectbox("Mutation", ["echange", "inversion", "insertion"])
 
-    # Bouton d'exécution
     if st.sidebar.button("🚀 Lancer la Simulation", type="primary"):
         executer_simulation(probleme, algorithme, iterations, locals())
 
-    # Affichage des données du problème
     st.header("Données du Problème")
 
     if probleme == "Voyageur de Commerce":
@@ -220,7 +209,6 @@ def afficher_resultats_tsp(resultats, algorithme):
     st.subheader("Meilleure Solution")
     st.write(solution)
 
-    # Visualisation simple du chemin
     st.subheader("Visualisation du Chemin")
     chemin = " → ".join([f"V{i}" for i in solution]) + f" → V{solution[0]}"
     st.info(chemin)
@@ -238,7 +226,6 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
     st.subheader("Meilleur Ordre d'Ordonnancement")
     st.write(solution)
 
-    # Affichage détaillé de l'ordonnancement
     st.subheader("Détail de l'Ordonnancement")
 
     temps_actuel = 0
@@ -261,8 +248,7 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
                 else:
                     st.success("✓ Dans les temps")
 
-        # Barre de progression pour la durée
-        duree_normalisee = tache.duree / 40  # Normalisation pour l'affichage
+        duree_normalisee = tache.duree / 40  
         st.progress(min(duree_normalisee, 1.0), text=f"Durée: {tache.duree} unités")
 
         temps_actuel = temps_fin
@@ -283,3 +269,4 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
