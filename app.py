@@ -180,8 +180,19 @@ def main():
             croisement = st.selectbox("Croisement", ["simple", "double", "barycentrique", "uniforme"])
             mutation = st.selectbox("Mutation", ["echange", "inversion", "insertion"])
 
-    if st.sidebar.button("🚀 Lancer la Simulation", type="primary"):
-        executer_simulation(probleme, algorithme, iterations, locals())
+    st.sidebar.markdown("---")
+    
+    st.sidebar.markdown("<h4 style='text-align: center; color: #ff4b4b;'>🎯 EXÉCUTION</h4>", unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.sidebar.columns([1, 3, 1])
+    with col2:
+        if st.button("🚀 LANCER LA SIMULATION", 
+                     type="primary", 
+                     use_container_width=True,
+                     use_container_width=True):
+            executer_simulation(probleme, algorithme, iterations, locals())
+    
+    st.sidebar.info("⚠️ La simulation peut prendre quelques secondes...")
 
     st.header("Données du Problème")
 
@@ -352,6 +363,7 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
 
 
