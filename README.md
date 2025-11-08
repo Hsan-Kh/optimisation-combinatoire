@@ -132,7 +132,7 @@ optimisation-combinatoire/
 
 ### 1. Installation
 ```bash
-git clone [votre-repo]
+git clone https://github.com/Hsan-Kh/optimisation-combinatoire
 cd optimisation-combinatoire
 pip install -r requirements.txt
 ```
