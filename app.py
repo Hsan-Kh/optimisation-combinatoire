@@ -62,6 +62,31 @@ def generer_taches(n_taches):
     return taches
 
 
+MATRICE_DISTANCES = [
+    [0, 2, 2, 7, 15, 2, 5, 7, 6, 5],
+    [2, 0, 10, 4, 7, 3, 7, 15, 8, 2],
+    [2, 10, 0, 1, 4, 3, 3, 4, 2, 3],
+    [7, 4, 1, 0, 2, 15, 7, 7, 5, 4],
+    [7, 10, 4, 2, 0, 7, 3, 2, 2, 7],
+    [2, 3, 3, 7, 7, 0, 1, 7, 2, 10],
+    [5, 7, 3, 7, 3, 1, 0, 2, 1, 3],
+    [7, 7, 4, 7, 2, 7, 2, 0, 1, 10],
+    [6, 8, 2, 5, 2, 2, 1, 1, 0, 15],
+    [5, 2, 3, 4, 7, 10, 3, 10, 15, 0]
+]
+
+TACHES = [
+    Tache(0, duree=5, deadline=20, priorite=3),
+    Tache(1, duree=3, deadline=10, priorite=5),
+    Tache(2, duree=8, deadline=25, priorite=2),
+    Tache(3, duree=4, deadline=15, priorite=4),
+    Tache(4, duree=6, deadline=30, priorite=1),
+    Tache(5, duree=2, deadline=8, priorite=5),
+    Tache(6, duree=7, deadline=35, priorite=3),
+    Tache(7, duree=5, deadline=18, priorite=4),
+]
+
+
 
 def calculer_retard_total(ordre, taches):
     temps_actuel = 0
@@ -327,6 +352,7 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
 
 
