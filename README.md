@@ -2,6 +2,8 @@
 
 Interface de simulation unifiée pour résoudre le problème du voyageur de commerce (TSP) et le problème d'ordonnancement des tâches avec différentes métaheuristiques.
 
+🌐 **[Accéder à l'application en ligne](https://optimisation-combinatoire-hsan-kh.streamlit.app/)**
+
 ## 📋 Description du Projet
 
 Ce projet implémente trois algorithmes d'optimisation pour résoudre deux problèmes classiques d'optimisation combinatoire :
@@ -130,14 +132,19 @@ optimisation-combinatoire/
 
 ## 🚀 Utilisation
 
-### 1. Installation
+### 1. Accès Direct
+🌐 **Interface en ligne :** [https://optimisation-combinatoire-hsan-kh.streamlit.app/](https://optimisation-combinatoire-hsan-kh.streamlit.app/)
+
+Aucune installation nécessaire ! Accédez directement à l'application via votre navigateur.
+
+### 2. Installation Locale (optionnelle)
 ```bash
-git clone https://github.com/Hsan-Kh/optimisation-combinatoire
+git clone https://github.com/[votre-username]/optimisation-combinatoire.git
 cd optimisation-combinatoire
 pip install -r requirements.txt
 ```
 
-### 2. Lancement
+### 2. Lancement (installation locale uniquement)
 ```bash
 streamlit run app.py
 ```
