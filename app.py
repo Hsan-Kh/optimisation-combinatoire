@@ -309,7 +309,7 @@ def executer_ordonnancement(algorithme, iterations, params):
 def afficher_resultats_tsp(resultats, algorithme):
     solution, distance = resultats
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns([5,2,2])
     with col1:
         st.metric("Algorithme", algorithme)
     with col2:
@@ -328,7 +328,7 @@ def afficher_resultats_tsp(resultats, algorithme):
 def afficher_resultats_ordonnancement(resultats, algorithme):
     solution, cout = resultats
 
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([5,2])
     with col1:
         st.metric("Algorithme", algorithme)
     with col2:
@@ -380,6 +380,7 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
 
 
