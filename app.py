@@ -216,7 +216,7 @@ def main():
     st.markdown("---")
     st.markdown("<h2 style='text-align: center; color: #ff4b4b;'> Exécution :</h2>", unsafe_allow_html=True)
     
-    col1, col2, col3 = st.columns([1, 10], 1)
+    col1, col2, col3 = st.columns([1, 10, 1])
     with col2:
         if st.button("🚀 LANCER LA SIMULATION", type="primary", use_container_width=True):
             # Créer params_dict explicitement avec les variables dont vous avez besoin
@@ -380,6 +380,7 @@ def afficher_resultats_ordonnancement(resultats, algorithme):
 if __name__ == "__main__":
 
     main()
+
 
 
 
