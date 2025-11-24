@@ -1,32 +1,32 @@
-# 🧠 Optimisation Combinatoire - TSP & Ordonnancement
+#  Optimisation Combinatoire - TSP & Ordonnancement
 
 Interface de simulation unifiée pour résoudre le problème du voyageur de commerce (TSP) et le problème d'ordonnancement des tâches avec différentes métaheuristiques.
 
-🌐 **[Accéder à l'application en ligne](https://optimisation-combinatoire-hsan-kh.streamlit.app/)**
+ **[Accéder à l'application en ligne](https://optimisation-combinatoire-hsan-kh.streamlit.app/)**
 
-## 📋 Description du Projet
+##  Description du Projet
 
 Ce projet implémente trois algorithmes d'optimisation pour résoudre deux problèmes classiques d'optimisation combinatoire :
 
 ### Problèmes Résolus
-- **🗺️ Voyageur de Commerce (TSP)** : Trouver le plus court chemin visitant toutes les villes
-- **⏰ Ordonnancement des Tâches** : Ordonnancer des tâches avec deadlines et priorités
+- ** Voyageur de Commerce (TSP)** : Trouver le plus court chemin visitant toutes les villes
+- ** Ordonnancement des Tâches** : Ordonnancer des tâches avec deadlines et priorités
 
 ### Algorithmes Implémentés
 - **Recherche Tabou**
 - **Recuit Simulé** 
 - **Algorithme Génétique**
 
-## 🎯 Problèmes
+##  Problèmes
 
-### 🗺️ Problème du Voyageur de Commerce
+###  Problème du Voyageur de Commerce
 Le voyageur de commerce doit visiter un ensemble de villes exactement une fois et revenir à son point de départ, en minimisant la distance totale parcourue.
 
 **Instance du problème :**
 - **Nombre de villes** : 10 (configurable)
 - **Matrice de distances** : n×n (distances symétriques)
 
-### ⏰ Problème d'Ordonnancement des Tâches
+###  Problème d'Ordonnancement des Tâches
 Ordonnancer un ensemble de tâches avec différentes durées, deadlines et priorités pour minimiser le makespan et les retards.
 
 **Fonctions objectif :**
@@ -34,7 +34,7 @@ Ordonnancer un ensemble de tâches avec différentes durées, deadlines et prior
 - `calculer_retard_total()` : Somme des retards par rapport aux deadlines
 - `calculer_cout()` : Combinaison pondérée des deux critères
 
-## 🚀 Interface de Simulation
+##  Interface de Simulation
 
 ### Application Streamlit
 Une interface web interactive déployable sur Streamlit Cloud.
@@ -45,7 +45,7 @@ Une interface web interactive déployable sur Streamlit Cloud.
 - Configuration dynamique des paramètres d'algorithmes
 - Visualisation des résultats en temps réel
 
-## 🔧 Algorithmes et Paramètres
+##  Algorithmes et Paramètres
 
 ### Recherche Tabou
 **Principe :** Évite les cycles en mémorisant les solutions récentes dans une liste tabou.
@@ -86,7 +86,7 @@ Une interface web interactive déployable sur Streamlit Cloud.
 - `inversion` : Inversion d'un segment
 - `insertion` : Déplacement d'un élément
 
-## 📊 Résultats et Visualisation
+##  Résultats et Visualisation
 
 ### Pour le TSP
 - Affichage du chemin optimal
@@ -100,7 +100,7 @@ Une interface web interactive déployable sur Streamlit Cloud.
 - Respect des deadlines et priorités
 - Détail de l'ordonnancement
 
-## 🎯 Fonctionnalités Avancées
+##  Fonctionnalités Avancées
 
 ### Génération de Données
 - **Générer aléatoirement** : Crée de nouvelles données complètement différentes
@@ -111,36 +111,35 @@ Une interface web interactive déployable sur Streamlit Cloud.
 - Paramètres spécifiques à chaque algorithme
 - Interface adaptative selon le problème choisi
 
-## 📁 Structure du Projet
+##  Structure du Projet
 
 ```
 optimisation-combinatoire/
-├── 🎯 app.py                          # Interface Streamlit principale
-├── 📋 requirements.txt                # Dépendances
-├── 🗺️ VoyageurDeCommerce/
+├──  app.py                          # Interface Streamlit principale
+├──  requirements.txt                # Dépendances
+├──  VoyageurDeCommerce/
 │   ├── RechercheParTabou.py
 │   ├── RécuitSimulé.py
 │   └── AlgorithmeGénétique.py
-├── ⏰ OrdonnancementDesTaches/
+├──  OrdonnancementDesTaches/
 │   ├── tache.py
 │   ├── utils.py
 │   ├── tabou.py
 │   ├── recuit_simule.py
 │   └── algo_genetique.py
-└── 📚 README.md
+└──  README.md
 ```
 
-## 🚀 Utilisation
+##  Utilisation
 
 ### 1. Accès Direct
-🌐 **Interface en ligne :** [https://optimisation-combinatoire-hsan-kh.streamlit.app/](https://optimisation-combinatoire-hsan-kh.streamlit.app/)
+ **Interface en ligne :** [https://optimisation-combinatoire-hsan-kh.streamlit.app/](https://optimisation-combinatoire-hsan-kh.streamlit.app/)
 
 Aucune installation nécessaire ! Accédez directement à l'application via votre navigateur.
 
 ### 2. Installation Locale (optionnelle)
 ```bash
-git clone https://github.com/[votre-username]/optimisation-combinatoire.git
-cd optimisation-combinatoire
+git clone https://github.com/[votre-username]/optimisation-combinatoire
 pip install -r requirements.txt
 ```
 
@@ -169,7 +168,7 @@ streamlit run app.py
 - Lancer la simulation avec le bouton "Résoudre"
 - Observer les résultats et visualisations en temps réel
 
-## 📈 Comparaison des Algorithmes
+##  Comparaison des Algorithmes
 
 | Critère | Recherche Tabou | Recuit Simulé | Algo Génétique |
 |---------|----------------|---------------|----------------|
@@ -180,7 +179,7 @@ streamlit run app.py
 | **Paramètres** | 2 | 3 | 6+ |
 | **Vitesse** | Moyenne | Rapide | Lente |
 
-## 🎓 Concepts Clés Implémentés
+##  Concepts Clés Implémentés
 
 ### Métaheuristiques
 - **Recherche locale** : Tabou
@@ -195,14 +194,14 @@ streamlit run app.py
 - **TSP** : Distance totale du parcours
 - **Ordonnancement** : Coût combiné (makespan + retards)
 
-## 🔮 Améliorations Futures
+##  Améliorations Futures
 - Ajout de visualisations graphiques avancées
 - Comparaison automatique des algorithmes
 - Génération de benchmarks
 - Export des résultats en PDF/Excel
 - Interface en temps réel avec animations
 
-## 👨‍💻 Auteur
+##  Auteur
 
 **Réalisé par :** Hsan Khecharem
 
@@ -212,10 +211,10 @@ streamlit run app.py
 
 *Projet académique - Optimisation combinatoire et métaheuristiques*
 
-## 📄 Licence
+##  Licence
 
 Ce projet est sous licence MIT - voir le fichier LICENSE pour plus de détails.
 
 ---
 
-💡 **Note :** Cette interface permet une étude comparative complète des métaheuristiques sur des problèmes d'optimisation combinatoire classiques, avec une expérience utilisateur intuitive et des visualisations avancées. Le projet démontre l'application pratique des algorithmes d'optimisation sur des problèmes réels de logistique et de planification.
+ **Note :** Cette interface permet une étude comparative complète des métaheuristiques sur des problèmes d'optimisation combinatoire classiques, avec une expérience utilisateur intuitive et des visualisations avancées. Le projet démontre l'application pratique des algorithmes d'optimisation sur des problèmes réels de logistique et de planification.
